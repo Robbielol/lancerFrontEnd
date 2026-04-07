@@ -1,4 +1,4 @@
-const LOCAL_API_URL = 'https://Lancer-api-env.eba-rv3sqeng.us-east-1.elasticbeanstalk.com';
+const LOCAL_API_URL = 'http://Lancer-api-env.eba-rv3sqeng.us-east-1.elasticbeanstalk.com';
 
 export const handleSearch = async (businessType, city, distance) => {
     const response = await fetch(LOCAL_API_URL+'/api/website/'+city+'/'+businessType+'/'+distance, {
