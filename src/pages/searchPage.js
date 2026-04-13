@@ -18,7 +18,7 @@ export const SearchPage = () => {
 
     return (
         <div>
-            <h1>LancerFind</h1>
+            <h1>LancerFind T1</h1>
             
             <form onSubmit={handleSearch}>
                 <input
