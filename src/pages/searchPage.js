@@ -18,7 +18,7 @@ export const SearchPage = () => {
 
     return (
         <div>
-            <h1>Love you &#9829; Thais!</h1>
+            <h1>LancerFind</h1>
             
             <form onSubmit={handleSearch}>
                 <input
