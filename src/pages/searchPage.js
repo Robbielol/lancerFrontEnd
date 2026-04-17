@@ -9,6 +9,7 @@ export const SearchPage = () => {
 
     // Custom hook logic
     const { places, isLoading, error, searchPlaces } = usePlaces();
+    const { recentSearches, isLoadingRecent, errorRecent, fetchRecentSearches } = useRecentSearches();
 
     const handleSearch = (e) => {
         e.preventDefault();
@@ -16,10 +17,23 @@ export const SearchPage = () => {
         searchPlaces(location, businessType, 10000);
     };
 
+    useEffect(() => {
+        fetchRecentSearches();
+    }, []);
+
+
     return (
         <div>
             <h1>LancerFind T1</h1>
-            
+            <p>Find local businesses in your area that need help!</p>
+
+            <div className="recent-searches-grid">
+                <h2>Recent Searches</h2>
+                {recentSearches.map((search, index) => (
+                    <RecentSearchCard key={index} search={search} />
+                ))}
+            </div>
+
             <form onSubmit={handleSearch}>
                 <input
                     placeholder="What are you looking for? (e.g. Barbers)"

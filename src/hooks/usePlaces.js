@@ -21,3 +21,24 @@ export const usePlaces = () => {
 
     return { places, isLoading, error, searchPlaces };
 };
+
+export const useRecentSearches = () => {
+    const [recentSearches, setRecentSearches] = useState([]);
+    const [isLoading, setIsLoading] = useState(false);
+    const [error, setError] = useState(null);
+
+    const fetchRecentSearches = async () => {
+        setIsLoading(true);
+        setError(null);
+        try {
+            const data = await fetchRecentSearches();
+            setRecentSearches(data);
+        } catch (err) {
+            setError(err.message);
+        } finally {
+            setIsLoading(false);
+        }
+    };
+
+    return { recentSearches, isLoading, error, fetchRecentSearches };
+};
