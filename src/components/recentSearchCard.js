@@ -1,4 +1,4 @@
-export const RecentSearchCard = ({ search}) => {
+export const RecentSearchCard = ({search}) => {
     return (
         <div className="search-card">
             <p>{search.city}</p>

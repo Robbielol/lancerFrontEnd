@@ -1,6 +1,7 @@
-import { useState } from 'react';
-import { usePlaces } from '../hooks/usePlaces';
+import { useState, useEffect } from 'react';
+import { usePlaces, useRecentSearches } from '../hooks/usePlaces';
 import { PlaceCard } from '../components/PlaceCard';
+import { RecentSearchCard } from '../components/RecentSearchCard';
 
 export const SearchPage = () => {
     //Local state for the input forms
@@ -18,6 +19,7 @@ export const SearchPage = () => {
     };
 
     useEffect(() => {
+        console.log("I ran");
         fetchRecentSearches();
     }, []);
 
@@ -27,12 +29,32 @@ export const SearchPage = () => {
             <h1>LancerFind T1</h1>
             <p>Find local businesses in your area that need help!</p>
 
-            <div className="recent-searches-grid">
-                <h2>Recent Searches</h2>
-                {recentSearches.map((search, index) => (
-                    <RecentSearchCard key={index} search={search} />
-                ))}
-            </div>
+            {/* 3. The Loading State: Show this while the backend is working */}
+            {isLoadingRecent && (
+                <div className="loading-spinner">
+                    <p>Loading recent searches...</p>
+                </div>
+            )}
+
+            {/* 4. The Error State: Show this if the C# server crashes */}
+            {errorRecent && (
+                <div className="error-banner">
+                    <p>Oops! Could not load recent searches: {errorRecent}</p>
+                </div>
+            )}
+
+            {/* 5. The Success State: Only show the list if we are done loading and have no errors */}
+            {!isLoadingRecent && !errorRecent && recentSearches.length > 0 && (
+                <div className="recent-searches-box">
+                    <h2>Recent Searches</h2>
+                    <ul>
+                        {recentSearches.map((search) => (
+                            // Use the MongoDB generated ID as your React key!
+                            <RecentSearchCard key={search.id} search={search}/>
+                        ))}
+                    </ul>
+                </div>
+            )}
 
             <form onSubmit={handleSearch}>
                 <input

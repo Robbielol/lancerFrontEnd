@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { handleSearch } from '../api/PlacesApi';
+import { handleSearch, handleRecentSearches } from '../api/PlacesApi';
 
 export const usePlaces = () => {
     const [places, setPlaces] = useState([]);
@@ -31,7 +31,8 @@ export const useRecentSearches = () => {
         setIsLoading(true);
         setError(null);
         try {
-            const data = await fetchRecentSearches();
+            const data = await handleRecentSearches();
+            console.log(data);
             setRecentSearches(data);
         } catch (err) {
             setError(err.message);

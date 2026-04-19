@@ -1,4 +1,4 @@
-const LOCAL_API_URL = 'https://api.lancerfind.com';
+const LOCAL_API_URL = 'https://localhost:7252';
 
 export const handleSearch = async (city, businessType, distance) => {
     const response = await fetch(LOCAL_API_URL+'/api/website/'+city+'/'+businessType+'/'+distance, {
@@ -17,8 +17,8 @@ export const handleSearch = async (city, businessType, distance) => {
     return await response.json();
 }
 
-export const fetchRecentSearches = async () => {
-    const response = await fetch(LOCAL_API_URL+'/api/website/', {
+export const handleRecentSearches = async () => {
+    const response = await fetch(LOCAL_API_URL+'/api/website/searches', {
         method: 'GET',
         cache: 'no-cache',
         credentials: 'same-origin',
