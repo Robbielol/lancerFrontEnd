@@ -19,8 +19,16 @@ export const SearchPage = () => {
         searchPlaces(location, businessType, 10000);
     };
 
+    const handleRecentCardClick = (city, type) => {
+        //Update the form input boxes so the user 
+        setLocation(city);
+        setBusinessType(type);
+
+        // Trigger the exact same API call from your custom hook!
+        searchPlaces(city, type, 10000);
+    };
+
     useEffect(() => {
-        console.log("I ran");
         fetchRecentSearches();
     }, []);
 
@@ -68,7 +76,7 @@ export const SearchPage = () => {
                         <ul>
                             {recentSearches.map((search) => (
                                 // Use the MongoDB generated ID as your React key!
-                                <RecentSearchCard key={search.id} search={search}/>
+                                <RecentSearchCard key={search.id} search={search} onSearchClick={handleRecentCardClick} />
                             ))}
                         </ul>
                     </div>
