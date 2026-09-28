@@ -1,4 +1,4 @@
-const LOCAL_API_URL = 'https://localhost:7252';
+const LOCAL_API_URL = import.meta.env.VITE_API_URL;
 
 export const handleSearch = async (city, businessType, distance) => {
     const response = await fetch(LOCAL_API_URL+'/api/website/'+city+'/'+businessType+'/'+distance, {
