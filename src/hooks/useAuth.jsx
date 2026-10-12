@@ -25,5 +25,21 @@ export const useAuth = () => {
         }
     };
 
-    return { executeRegistration, isLoading, error };
-};
+    const executeLogin = async (email, password) => {
+        setIsLoading(true);
+        setError(null);
+
+        try {
+            const response = await AuthApi.loginUser(email, password);
+            console.log("Login Success:", response);
+            return response;
+        } catch (err) {
+            setError(err.message || "An unexpected error occurred during login.");
+            throw err; 
+        } finally {
+            setIsLoading(false);
+        }
+    };
+
+    return { executeRegistration, executeLogin, isLoading, error };
+  };
