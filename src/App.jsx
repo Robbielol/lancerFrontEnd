@@ -1,6 +1,6 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { RegisterPage } from './pages/RegisterPage';
-import { LoginPage } from './pages/loginPage';
+import { LoginPage } from './pages/LoginPage';
 import { SearchPage } from './pages/SearchPage';
 import { Navigate } from 'react-router-dom';
 // import { useAuthContext } from './context/AuthContext'; 
