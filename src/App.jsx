@@ -1,5 +1,5 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import { RegisterPage } from './pages/RegisterPage';
+import { RegisterPage } from './pages/TempPage';
 import { LoginPage } from './pages/loginPage';
 import { SearchPage } from './pages/SearchPage';
 import { Navigate } from 'react-router-dom';
