@@ -1,6 +1,6 @@
 export const AuthApi = {
     registerUser: async (email, password, username) => {
-        const response = await fetch(`${import.meta.env.VITE_API_URL}/api/user/register`, {
+        const response = await fetch(`${import.meta.env.VITE_API_URL}/api/users/register`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
