@@ -24,7 +24,7 @@ export const LoginPage = () => {
     const onSubmit = async (data) => {
         try {
             await executeLogin(data.email, data.password);
-            // Later: Redirect to /search on success
+            navigate('/search'); // Redirect to search page after successful login
         } catch (err) {
             // Error is handled by useAuth and displayed below
             console.error("Login failed:", err.message);
