@@ -1,6 +1,7 @@
 import "../styles/auth.css";
 import { useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
+import { useAuth } from '../hooks/useAuth';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 
@@ -12,14 +13,22 @@ const schema = yup.object().shape({ //json obect
 });
 
 export const RegisterPage = () => {
+    const navigate = useNavigate();
     const { register, handleSubmit, formState: { errors } } = useForm({
         resolver: yupResolver(schema),
         mode: 'onBlur'
     });
 
-    const handleRegister = (data) => {
+    const { executeRegistration, isLoading, error: apiError } = useAuth();
+
+    const handleRegister = async (data) => {
         // Implement registration logic here
-        console.log('Registering user:', { data });
+        try {
+            await executeRegistration(data.email, data.password, data.username);
+            navigate('/login'); // Redirect to login page after successful registration
+        } catch (error) {
+            console.error("Registration failed:", error);
+        }
     };
 
     return (
@@ -31,6 +40,9 @@ export const RegisterPage = () => {
                     <p>Join to start searching for leads.</p>
                 </div>
                 <form onSubmit={handleSubmit(handleRegister)} className="register-form">
+
+                    {/* Displays "Invalid email or password" from C# */}
+                    {apiError && <p className="api-error" style={{ color: 'red' }}>{apiError}</p>}
                 
                     <div className="input-group">
                         {/* 4. Use the register function instead of value/onChange */}
@@ -54,7 +66,9 @@ export const RegisterPage = () => {
                         <p className="error-text" style={{ color: 'red' }}>{errors.confirmPassword?.message}</p>
                     </div>
 
-                    <button className="btn-primary" type="submit">Register</button>
+                    <button className="btn-primary" type="submit" disabled={isLoading}>
+                        {isLoading ? 'Registering...' : 'Register'}
+                    </button>
 
                     <div className="auth-switch">
                         Already have an account? 
